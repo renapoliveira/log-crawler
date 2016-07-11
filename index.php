@@ -19,7 +19,13 @@
 use LogCrawler\Tracer\Tracer as Tracer;
 use LogCrawler\Crawler\Crawler as Crawler;
 
-require_once 'app/start.php';
+$loader = require __DIR__.'/vendor/autoload.php';
 
 //$tracer = new Tracer();
-$crawler = new Crawler();
+$crawler = new Crawler('http://127.0.0.1/logs/', '/tmp/logs/');
+
+$crawler->checkPermission();
+$crawler->createDir();
+$crawler->checkFiles();
+$crawler->downloadFiles();
+$crawler->compressFiles();
